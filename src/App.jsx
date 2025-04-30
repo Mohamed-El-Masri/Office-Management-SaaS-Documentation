@@ -10,6 +10,7 @@ import MultiTenancy from './pages/MultiTenancy'
 import DesignPatterns from './pages/DesignPatterns'
 import Security from './pages/Security'
 import Frontend from './pages/Frontend'
+import CoreTechnologies from './pages/CoreTechnologies'
 import React from 'react';
 import IconDemo from './components/IconDemo';
 import './App.css';
@@ -53,6 +54,7 @@ function App() {
               <Route path="/design-patterns" element={<DesignPatterns />} />
               <Route path="/security" element={<Security />} />
               <Route path="/frontend" element={<Frontend />} />
+              <Route path="/core-technologies" element={<CoreTechnologies />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>

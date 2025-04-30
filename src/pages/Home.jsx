@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa'
 import AnimatedSection from '../components/ui/AnimatedSection'
 
+
 // Placeholder for hero image - replace with actual image path
 const heroImage = "/assets/images/dashboard-preview.png"
 

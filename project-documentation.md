@@ -1,278 +1,321 @@
-1. التقنيات الأساسية (Core Technologies)
+# Office Management SaaS - Technical Documentation
 
-ASP.NET Core 8 (MVC) + web API :
+## 1. Core Technologies
 
+### Backend Technologies
 
-Entity Framework Core:
-ORM لإدارة قواعد البيانات والتحكم في الـ migrations.
+**ASP.NET Core 8 (MVC + Web API)**
+- Modern, cross-platform framework for building web applications and APIs
+- Supports RESTful API design with versioning capability
+- Built-in dependency injection and middleware pipeline
 
-SQL Server:
-قاعدة البيانات الأساسية 
+**Entity Framework Core**
+- ORM for database management and control of migrations
+- Supports code-first and database-first approaches
+- Handles multi-tenant data access patterns
 
-Identity Framework:
-لإدارة تسجيل الدخول، تسجيل الخروج، صلاحيات المستخدمين.
+**SQL Server**
+- Primary database for the application
+- Supports row-level security for multi-tenancy
+- Offers advanced features like temporal tables and JSON support
 
-2. الباكيجات المهمة (NuGet Packages)
+**Identity Framework**
+- Manages user authentication, logout, and permission systems
+- Integrates with ASP.NET Core for secure user management
+- Customizable user and role stores
 
-Microsoft.EntityFrameworkCore.SqlServer
-لدعم SQL Server مع EF Core.
+## 2. Important NuGet Packages
 
-Microsoft.AspNetCore.Identity.EntityFrameworkCore
-لإدارة المستخدمين والصلاحيات مع Identity.
+**Microsoft.EntityFrameworkCore.SqlServer**
+- SQL Server support for EF Core
 
-AutoMapper
-لتحويل البيانات بين DTOs وEntities.
+**Microsoft.AspNetCore.Identity.EntityFrameworkCore**
+- User and permission management with Identity
 
-FluentValidation
-لإجراء الفاليديشن على المدخلات بسهولة وبطريقة مرتبة.
+**AutoMapper**
+- Simplifies mapping between DTOs and Entities
 
-Serilog
-لتسجيل الـ logs بشكل احترافي وقابل للتوسعة.
+**FluentValidation**
+- Provides clean, fluent validation for input models
 
-MediatR
-لتطبيق نمط CQRS بطريقة نظيفة ومنظمة.
+**Serilog**
+- Professional, extensible logging framework
 
-Swashbuckle.AspNetCore (Swagger)
-لتوليد وتوثيق APIs بشكل تلقائي (مفيد جدًا حتى داخليًا).
+**MediatR**
+- Implements CQRS pattern cleanly and efficiently
 
-Localization (Microsoft.Extensions.Localization)
-لدعم تعدد اللغات (عربي - إنجليزي).
+**Swashbuckle.AspNetCore (Swagger)**
+- Automatic API documentation generation
+- Interactive API testing interface
 
-Hangfire (اختياري)
-لو حابب تعمل جداول تذكيرات Notifications أو Tasks مجدولة في الخلفية.
+**Microsoft.Extensions.Localization**
+- Support for multiple languages (Arabic - English)
 
-EFCore.MultiTenancy (أو تبني فكرة Multi-Tenant يدويًا)
-لدعم قاعدة بيانات منفصلة أو سكيمه منفصلة لكل عميل.
+**Hangfire (optional)**
+- For scheduling background tasks and notifications
 
+**EFCore.MultiTenancy**
+- For supporting separate database or schema per client
 
+## 3. Design Patterns
 
+**MVC Pattern**
+- Structured separation between views, logic, and data
 
-3. أنماط التصميم (Design  Patterns)
+**Repository Pattern**
+- Separates data access from Controllers
+- Implements a consistent data access interface
+- Facilitates unit testing with mock repositories
 
-MVC Pattern
-لتقسيم منظم بين العرض والمنطق والبيانات.
+**Unit of Work Pattern**
+- Manages multiple modifications within the same transaction
+- Ensures data consistency across repositories
+- Implements atomic operations for business processes
+
+**CQRS (Command Query Responsibility Segregation)**
+- Separates modification commands from read queries
+- Typically implemented with MediatR
+- Supports different optimization strategies for reads vs. writes
+
+**Dependency Injection (DI)**
+- Ensures testability and extensibility
+- Core feature of ASP.NET Core
+- Simplifies service registration and lifetime management
+
+**Localization Strategy**
+- Flexible design for language switching
+- Culture-aware formatting for dates, numbers, and currencies
+- Support for right-to-left languages (Arabic)
+
+**Factory Pattern**
+- Creates services based on client settings
+- Isolates complex initialization logic
+- Supports different implementations for different tenants
+
+**Clean Architecture / Onion Architecture**
+- Separation of concerns with layered approach
+- Domain-centric design with dependency rules
+- Core business logic isolated from infrastructure details
+
+## 4. Frontend Technologies (Angular)
+
+**Angular Framework**
+- Structure for building organized, robust applications
+- Component-based architecture
+- TypeScript for type safety and better tooling
+
+**RxJS**
+- Manages asynchronous events and data streams
+- Handles API responses and WebSocket communications
+- Provides powerful operators for data transformation
+
+**State Management**
+- NgRx or Angular Services with BehaviorSubjects
+- Predictable state containers
+- Developer tools for debugging
+
+**UI Frameworks**
+- Bootstrap or Tailwind CSS
+- Responsive design components
+- Consistent styling across the application
+
+**SCSS**
+- More organized CSS with nesting capabilities
+- Variables and mixins for reusable styles
+- Better maintainability for complex UIs
+
+**Angular Router**
+- Navigation between pages and modules
+- Route guards for authorization
+- Lazy loading for better performance
+
+**Internationalization**
+- Angular i18n or ngx-translate
+- Runtime language switching
+- Bidirectional text support for Arabic
+
+**PWA Support**
+- Offline functionality
+- Mobile installation capabilities
+- Background sync for intermittent connectivity
+
+## 5. Design Patterns for Frontend
+
+**Component-Based Structure**
+- Small, reusable components
+- Clear separation of responsibilities
+- Consistent API for component interaction
+
+**Smart and Dumb Components**
+- Smart: Contains business logic and data services
+- Dumb: Focused on presentation with minimal logic
+- Better reusability and testing
+
+**Container/Presenter Pattern**
+- Separates data fetching from presentation
+- Improves component reuse
+- Simplifies testing of UI components
+
+**Dependency Injection**
+- Centralized service management
+- Easier testing with mock services
+- Consistent data access across components
+
+**Observer Pattern (RxJS Subjects)**
+- Reactive updates to data changes
+- Event-based programming model
+- Efficient change detection
+
+**Facade Pattern**
+- Simplifies access to complex subsystems
+- Provides unified API to multiple services
+- Reduces dependencies in components
+
+## 6. Technical Considerations for Frontend
+
+**Authentication & Authorization**
+- JWT token management
+- Secure login and session handling
+- Token storage and refresh strategies
+
+**Role-Based Access Control**
+- Dynamic UI elements based on permissions
+- Route guards for protected areas
+- Feature toggling based on user roles
+
+**Dynamic UI**
+- Configurable menu labels and terminology
+- Client-specific customizations
+- Dynamic form generation
+
+**Localization & RTL Support**
+- Instant language switching
+- Right-to-left layout for Arabic
+- Culture-specific formatting
+
+**Error Handling**
+- Local component-level error handling
+- Global application error interception
+- User-friendly error messages
+
+**API Interceptors**
+- Token attachment to requests
+- Centralized error handling
+- Loading state management
 
-Repository Pattern
-لفصل التعامل مع البيانات عن الـ Controllers.
+**Loading Indicators**
+- Skeleton screens for better UX
+- Progress indicators for long operations
+- Optimistic UI updates
+
+**Reactive Forms**
+- Dynamic form validation
+- Complex form workflows
+- Form state management
+
+**Local Storage Management**
+- Caching frequently used data
+- Persistence of user preferences
+- Offline data availability
 
-Unit of Work Pattern
-لإدارة التعديلات المتعددة داخل نفس الـ Transaction.
-
-CQRS (Command Query Responsibility Segregation)
-لفصل أوامر التعديل عن أوامر القراءة (خاصة مع MediatR).
-
-Dependency Injection (DI)
-لضمان سهولة اختبار وتوسيع التطبيق.
-
-Localization Strategy
-تصميم مرن لتغيير اللغة ومحتوى القوائم حسب إعدادات العميل.
-
-Factory Pattern (بسيط)
-لو بتحتاج تعمل تهيئة Services معينة بناءً على إعدادات العميل.
-
-
-Clean architecture and Onion Architecture
-مهم نفهمها
-
-
-المواضيع والتكنولوجيات والديزاين باتيرن المهمين للفرونت (باستخدام Angular فقط)
-
-أولاً: التكنولوجيات (Technologies)
-
-Angular Framework
-لبناء التطبيق بطريقة منظمة وقوية.
-
-RxJS
-لإدارة التدفق Asynchronous Events مثل انتظار بيانات من API أو التعامل مع WebSocket.
-
-NgRx أو Angular Services with BehaviorSubjects
-لإدارة الحالة بين الكومبوننتس.
-
-TypeScript
-للكتابة بكود منظم وآمن وقابل للتوسعة.
-
-Bootstrap أو Tailwind CSS
-لعمل تصميم متجاوب بشكل سريع ومنظم.
-
-SCSS
-لو حابب تكتب CSS أكثر احترافية وتنظيم.
-
-Angular Router
-لإدارة التنقل بين الصفحات والموديولات.
-
-Angular i18n أو ngx-translate
-لدعم تغيير اللغة بين العربية والإنجليزية في أي وقت.
-
-PWA Support
-لو عايز مستقبليًا تدعم العمل أوفلاين أو من موبايل كـ Web App.
-
-ثانياً: الديزاين باتيرن (Design Patterns)
-
-Component-Based Structure
-تقسيم المشروع إلى مكونات صغيرة قابلة لإعادة الاستخدام.
-
-Smart and Dumb Components
-
-Smart: تحتوي على لوجيك البيانات والتعامل مع الخدمات.
-
-Dumb: تعرض بيانات فقط مع أقل لوجيك ممكن.
-
-
-Container/Presenter Pattern
-فصل ما بين من يجلب البيانات ومن يعرضها.
-
-Dependency Injection (DI)
-لإدارة الخدمات (Services) بشكل مركزي ومنظم.
-
-Observer Pattern (RxJS Subjects)
-لمتابعة التغييرات التلقائية في الداتا أو الأحداث.
-
-Facade Pattern
-عشان تبسط الوصول للبيانات والخدمات بدل التعقيد في الكومبوننت.
-
-
-ثالثاً: مواضيع تقنية لازم تهتم بيها في الفرونت
-
-التوثيق والتحقق (Authentication & Authorization)
-التعامل مع تسجيل الدخول باستخدام JWT Tokens، وحفظ التوكن وإرساله مع كل طلب.
-
-التحكم في الصلاحيات (Role-Based Access Control)
-عرض وإخفاء القوائم والأزرار حسب صلاحيات المستخدم.
-
-Dynamic UI (تغيير أسماء القوائم)
-جعل كل المسميات الأساسية (زي المشاريع والتاسكات) تيجي Dynamic من API أو Configuration داخلي، بحيث كل عميل يخصص المسميات زي ما يحب.
-
-التبديل بين اللغات (Localization & RTL Support)
-دعم التحويل الفوري بين عربي وإنجليزي وتغيير اتجاه الصفحة بدون إعادة تحميل.
-
-التعامل مع الأخطاء (Error Handling)
-
-التعامل مع الأخطاء على مستوى الكومبوننت (local).
-
-أو على مستوى التطبيق كله (global) باستخدام Interceptor.
-
-
-استخدام API Interceptors
-لإضافة التوكنات أو معالجة الأخطاء بشكل مركزي لكل الطلبات.
-
-Loading Indicators and Skeletons
-عرض مؤشرات انتظار محترمة عند تحميل الداتا.
-
-Reactive Forms
-لإدارة نماذج الإدخال وفاليديشن الفواتير والمستندات بطريقة ديناميكية.
-
-Local Storage or Session Storage
-لحفظ بعض البيانات البسيطة محليًا بدون الاعتماد كل مرة على السيرفر.
-
-تحسين الأداء (Performance Optimization)
-
-استخدام Lazy Loading للموديولات.
-
-Avoid Unnecessary Change Detection.
-
-
-===================================================================================
-
-
-
-وثيقة توثيق نظام إدارة المكاتب (SaaS)
-مقدمة عن فكرة النظام وSaaS ومزاياه
-نظام إدارة المكاتب بنموذج Software as a Service (SaaS) هو تطبيق سحابي يُقدَّم للمستخدمين عبر الإنترنت، حيث يتولى مزوِّد الخدمة (Provider) تشغيل التطبيق وإدارة كل الموارد اللازمة له (سيرفرات، شبكات، قواعد بيانات)​
-en.wikipedia.org
-. يتيح هذا النموذج للعملاء الوصول إلى البرنامج عبر متصفح ويب دون الحاجة لتركيبات معقدة على أجهزتهم، ويضمن التحديث المستمر وإضافة ميزات جديدة دون انقطاع للمستخدم. من مزايا هذا النموذج السحابي القدرة العالية على التوسع (Scalability) واستغلال موارد الحوسبة حسب الحاجة، الأمر الذي يخفض التكلفة على المستخدمين بفضل اقتصادية الحجم (economy of scale)​
-en.wikipedia.org
-. يعمل النظام عادة بنمط متعدد المستأجرين (Multi-Tenancy)، حيث تشترك عدة شركات (مستأجرين) في نفس بنية النظام لتحقيق كفاءة أكبر، مع إمكانية توفير عزل تام للبيانات عند الحاجة بدفع رسوم إضافية​
-en.wikipedia.org
-. يعتمد نموذج الإيرادات عادةً على الاشتراكات الشهرية أو السنوية، مع إمكانية توفير فترة تجريبية مجانية أو نموذج Freemium لجذب العملاء الجدد.
-الأدوار (Roles)
-دور Super Admin (المشرف الأعلى): هو المستخدم الأعلى صلاحية في النظام، لديه رؤية وإدارة كاملة لجميع إعدادات المنصة وبيانات جميع المستأجرين (العملاء)، بما في ذلك إنشاء حسابات مدراء جدد وإدارة البنية التحتية والتراخيص.
-دور Tenant Admin (المسؤول عن المستأجر): هو مسؤول داخل شركة معينة (مستأجر) له صلاحيات إدارة بيانات ومنشآت تلك الشركة فقط، مثل إدارة المستخدمين التابعين لشركته، وتخصيص الصلاحيات والمهام، والإشراف على إعدادات الشركة الداخلية.
-دور User (المستخدم النهائي): هم الموظفون العاديون داخل كل شركة، لهم صلاحيات محدودة للقيام بالمهام اليومية مثل حجز المكاتب والاجتماعات، رفع المستندات، ومتابعة العمليات المكتبية حسب الصلاحيات الممنوحة لهم من المسؤول.
-دورة حياة المستخدم (User Lifecycle)
-التسجيل (Registration): يبدأ المستخدم بإنشاء حساب جديد عبر صفحة التسجيل، حيث يقدم معلوماته (اسم الشركة، البريد الإلكتروني، كلمة السر، وغيرها).
-التحقق من البريد (Email Verification): بعد التسجيل، يُرسل إلى المستخدم رسالة تحقق بالبريد الإلكتروني لتفعيل الحساب.
-تهيئة الحساب التجريبي (Trial Activation): بعد التحقق، يُنشئ النظام فوراً نسخة مخصصة للعميل (مستأجر جديد) ويضعها في وضع التجربة المجانية. يتيح النظام للمستخدمين تجربة خدماته مجاناً لفترة محدودة مع بعض القيود (مثل عدد المستخدمين أو المساحة التخزينية)، وفقاً لما نوهت إليه توصيات SaaS بشأن فترات التجربة​
-learn.microsoft.com
-.
-الاشتراك والدفع (Subscription & Payment): قبل نهاية الفترة التجريبية أو بعدها، يتاح للمستخدمين اختيار خطة اشتراك مدفوعة. عند اختيار خطة، يتوجب عليه إدخال بيانات الدفع (بطاقة ائتمانية مثلاً) وتأكيد الاشتراك. يُعالج النظام الدفع باستخدام بوابة دفع إلكترونية، ويُفعّل الاشتراك عند نجاح المعاملة.
-التجديد أو التعليق (Renewal or Suspension): يعتني النظام بتذكير المستخدمين بتجديد اشتراكهم عند انتهاءه. إذا فشل السداد أو رفض المستخدم التجديد، يُعلّق الحساب مؤقتاً. كما تشير الممارسات المعمارية للسحابة إلى أنه في حال تعذّر تحصيل المبلغ من العميل، يتم إلغاء تفعيل الاشتراك (تعليق الحساب) كإجراء مؤقت​
-learn.microsoft.com
-. في هذه الحالة يظل بوسع العميل استرجاع بياناته عند السداد لاحقاً أو إعادة الاشتراك خلال فترة معينة قبل حذفه النهائي.
-المنطق البيزنسية (Business Logic)
-عملية التسجيل وإنشاء المستأجر: عند تسجيل عميل جديد، يقوم النظام بإنشاء كيان جديد (Tenant) يمثل الشركة في قاعدة البيانات. بناءً على تصميم تعدد المستأجرين المتبع، إما أن يُنشئ النظام قاعدة بيانات منفصلة بالكامل لكل مستأجر (Database-per-tenant) أو مخطط (Schema) مستقل داخل قاعدة بيانات مشتركة. الخيار الأول يوفر عزلاً تاماً للبيانات ويُسهّل تخصيص هيكل قاعدة البيانات (مثل إضافة حقول خاصة) لكل عميل​
-learn.microsoft.com
-. الخيار الثاني يقلل التكاليف ويعتمد على عمود معرف خاص بالعميل (Tenant ID) في كل جدول لعزل بيانات كل مستأجر​
-learn.microsoft.com
-. يقوم النظام بتخزين مُعرِّفات الاتصال (Connection Strings) لكل مستأجر أو يعتمد على فلاتر عالمية في Entity Framework لتقييد البيانات حسب المعرف.
-تهيئة قاعدة البيانات أو المخطط: فور إنشاء المستأجر، يمضي النظام في تهيئة هيكل البيانات الخاص به. إذا كان نمطنا قاعدة بيانات منفصلة، ينسخ النظام نموذجاً مبدئياً (Template) لإنشاء DB جديدة وتطبيق آخر تحديثات المخططات (Migrations). إذا كان نمطنا مخططاً مشتركاَ، يضيف النظام صفاً جديداً في جدول المستأجرين مع البدء بتقسيم البيانات ضمن المخطط المشترك حسب Tenant ID.
-تفعيل الفترة التجريبية: تُسجّل معلومات الاشتراك التجريبي في النظام (مثل تاريخ البداية والنهاية، والحد الأقصى للموارد المسموح بها). يقيّد النظام ميزات معينة أو الحجم ليطابق الشروط المحددة للفترة التجريبية​
-learn.microsoft.com
-. وعند انتهاء هذه الفترة، يُرسل النظام إشعارات تلقائية تطلب تجديد الاشتراك أو اختيار باقة مدفوعة.
-إدارة الاشتراكات والمدفوعات: يدير النظام باقات الاشتراك المختلفة (مثل شهري أو سنوي)، ويربط لكل مستخدم أو عميل حالة اشتراك نشطة أو منتهية. عند اختيار دفع، يتم تحويل العميل إلى بوابة دفع خارجية (Stripe أو PayPal وغيرها). بعد إتمام الدفع بنجاح، يُحدِّث النظام حالة الاشتراك إلى نشط ويوقف أي قيود تجريبية سابقة. في حال عدم الدفع، قد يتم تعليق الخدمة تلقائياً​
-learn.microsoft.com
- أو تقليل الصلاحيات حتى تكتمل عملية السداد. يدعم المنطق التعامل مع التجديد التلقائي (Auto-Renewal) وتنفيذ سياسة استرداد الأموال أو الإشعارات التذكيرية حسب الإعدادات.
-الشرح الفني
-البنية الخلفية (Backend Architecture)
-تُبنى الواجهة الخلفية للنظام باستخدام ASP.NET Core مع اعتماد نمط طبقي (Layered Architecture):
-طبقة البيانات (Data Access): تستخدم Entity Framework Core كـORM للوصول إلى قاعدة البيانات. يمثل كل مستأجر سياق بيانات مستقل (DbContext) وفقاً لنموذج تعدد المستأجرين المتبع. ويتضمن نموذج البيانات جداولاً رئيسية مثل Tenants، Users، Subscriptions، Payments، بالإضافة إلى جداول خاصة بعمل المكتب (مكاتب، اجتماعات، مستندات، مهام…).
-طبقة الأعمال (Business Logic): تحتوي على الخدمات (Services) التي تنفذ قواعد العمل (Business Rules) للنظام. مثل خدمة إدارة حسابات المستخدمين، خدمة تخطيط الاشتراكات، وخدمة التعامل مع المكاتب والاجتماعات.
-التحكم بالوصول (Authentication/Authorization): نستخدم ASP.NET Core Identity لإدارة تسجيل الدخول وكلمات المرور. يعتمد النظام على التوثيق بمعيار OAuth 2.0/JWT لتأمين واجهات الـAPI. تُخصص الأدوار (Roles) للمستخدمين بحيث تُقسَّم الصلاحيات إلى “Super Admin”، “Tenant Admin”، و”User”. تُرفق كل طلب API برمز JWT يُصادَق عليه، ويُستخدم المرشح [Authorize] للتأكد من صلاحية المستخدم حسب الدور.
-الواجهة الخلفية العامة: توفر مجموعات من Controllers التي ترحِّب بالطلبات الواردة (RESTful APIs). كل مسار (Endpoint) يعبّر عن عملية محددة (إنشاء مستخدم، تسجيل دخول، حجز مكتب، إلخ) ويرتبط بواحد أو أكثر من الخدمات داخل طبقة الأعمال.
-الواجهة الأمامية (Frontend Architecture)
-واجهة المستخدم (Front-End) مبنية بـ Angular وتُبنى كـSingle Page Application لتنظيم الواجهات للمستخدمين النهائيين:
-التقسيم إلى مكونات (Components): تُنظم الشاشة إلى مكوّنات متفرعة (مثل مكون تسجيل الدخول، مكون لوحة التحكم Dashboard، مكون إدارة المكاتب، إلخ)، بحيث يتعامل كل منها مع عرض وعمليات محددة.
-الخدمات (Services): تُستخدم خدمات Angular للتواصل مع الـAPI الخلفية (مثلاً AuthService لإدارة تسجيل الدخول، OfficeService لإدارة المكاتب).
-إدارة الحالة: يمكن استخدام حلول مثل NgRx أو أبسطها لحفظ حالة التطبيق مثل بيانات المستخدم الحالية واللغة المختارة.
-تعدد اللغات (Localization): تدعم الواجهة اللغة العربية (اتجاه كتابة من اليمين إلى اليسار) والإنجليزية. يمكن استخدام @angular/localize أو مكتبات مثل ngx-translate لتحميل نصوص الترجمة من ملفات (JSON أو XLIFF) وتبديل اللغة ديناميكياً. كما يجب التأكد من ضبط CSS لضمان واجهة RTL عند اختيار العربية.
-التصميم (UI/UX): تُفضل أطر عمل مثل Angular Material أو PrimeNG لتوحيد مظهر المكونات، مع مراعاة تجربة مستخدم واضحة وبسيطة في الوصول إلى الوظائف الرئيسية (الحجز، التقارير، إدارة المستخدمين).
-هيكل واجهات برمجة التطبيقات (API Structure)
-تعتمد واجهات برمجة التطبيقات على نمط RESTful API حيث يمثل كل endpoint مورداً (Resource) في النظام:
-المسارات (Routes): مثلاً /api/auth/login، /api/tenants/{id}/users، /api/offices/{officeId}/bookings إلخ.
-الطرق (Methods): تستخدم الأساليب القياسية (GET لاسترجاع البيانات، POST للإضافة، PUT للتعديل، DELETE للحذف).
-هيكل البيانات (Payload): يتضمن إرسال واستقبال بيانات بصيغة JSON مع حقول واضحة. تُحافَظ الكيانات ضمن الـEntities التي يحددها EF Core.
-توثيق الـAPI: يُفضل استخدام أدوات مثل Swagger/OpenAPI لإنشاء مستندات تفاعلية تلقائياً، تسهّل على فرق الواجهة الأمامية وعملاء الخدمة فهم البنية والمتطلبات لكل API.
-التصفية وترقيم الصفحات: نظراً لوجود بيانات متعدّدة، يقدم النظام دعم التصفية (Filtering) والترتيب (Sorting) وتقسيم الصفحات (Pagination) لتسهيل التعامل مع مجموعات البيانات الكبيرة دون تحميلها دفعة واحدة.
-إدارة تعدد المستأجرين (Multi-Tenancy Management)
-يعتمد النظام نموذج تعدد المستأجرين لتحقيق عزل منظم وفعّال لبيانات كل عميل:
-تحديد المستأجر الحالي: يُحدد المستأجر في كل طلب عن طريق إحدى الطرق: إما مجال فرعي (subdomain) خاص بكل عميل، أو تردد في عنوان الـURL، أو عبر بيانات اعتماد التسجيل. تُلتقط هوية المستأجر بواسطة وساطة (Middleware) في ASP.NET Core تضيف معرف المستأجر إلى سياق الطلب (HttpContext).
-عزل البيانات:
-في نموذج قاعدة بيانات منفصلة لكل مستأجر، يستخدم النظام سلسلة اتصال مخصصة لكل عميل. عند استقبال طلب من عميل معين، يُثبت النظام DbContext على قاعدة بيانات ذلك العميل بحيث تُنفَّذ العمليات دون الوصول لبيانات الآخرين​
-learn.microsoft.com
-.
-في نموذج قاعدة بيانات مشتركة، تحوي الجداول عموداً معرفاً للمستأجر (TenantId) في كل سجل. تُفرض عامل تصفية عالمي (Global Query Filter) في EF Core على جميع الجداول لضمان عدم استرجاع أو تعديل إلا سجلات المستأجر الحالي. تتضمن مخططات قاعدة البيانات المشتركة قواعد بيانات SaaS النموذجية عمود TenantId مُكوناً المفتاح الرئيسي مع حقول أخرى​
-learn.microsoft.com
-.
-الأمان الإضافي: لتعزيز الحماية، يمكن استخدام SQL Server Row-Level Security لتقييد وصول الاستعلامات على مستوى الصفوف لضمان عدم تسرب بيانات مستأجر إلى مستأجر آخر​
-learn.microsoft.com
-. وتُدار نسخ احتياطية وفصل قواعد بيانات المرونة (Elastic Pools) لتوزيع الأحمال بين قواعد بيانات المستأجرين مع الحفاظ على الأداء العالي.
-الأمن (Security Measures)
-يُطبق النظام أفضل ممارسات الأمان على النحو التالي:
-الاتصال المشفّر: يعتمد النظام بروتوكول TLS (HTTPS) فقط لتأمين نقل البيانات بين العميل والخادم.
-المصادقة والتفويض: يُستخدم JWT (JSON Web Tokens) لتوثيق هوية المستخدمين. بعد تسجيل الدخول بنجاح، يصدر النظام رمز JWT موقعاً رقمياً، يُرفق مع كل طلب. تُفحص صحة الرمز وسريان مدته قبل السماح بالوصول إلى الموارد.
-إدارة الصلاحيات: يعتمد مبدأ Role-Based Access Control (RBAC)، حيث تُمنح الصلاحيات بناءً على الدور (مثل “Super Admin” أو “Tenant Admin” أو “User”). يتحقق النظام من صلاحيات المستخدم قبل تنفيذ أي عملية حساسة مثل إدارة المستخدمين أو تعديل خطط الاشتراك.
-التخزين الآمن: تُخزّن كلمات المرور مشفّرة باستخدام خوارزميات قياسية (مثل PBKDF2 أو bcrypt) بواسطة ASP.NET Core Identity. كما نُعزِّز قواعد البيانات بالتشفير عند الراحة (TDE) إن لزم الأمر.
-حماية ضد الهجمات الشائعة: يتم التحقق والتطهير (Validation & Sanitization) لجميع المدخلات لحماية النظام من حقن SQL وXSS، ويُفعّل CORS مع سياسات صارمة لضمان قبول الطلبات فقط من المجالات المصرح بها. تُطبق أيضاً سياسة القفل (Lockout) للحسابات بعد عدة محاولات فاشلة لمنع هجمات التخمين.
-الإشعارات البريدية والتنبيهات (Email & Notification System)
-يشتمل النظام على آلية إرسال تنبيهات بريدية ورسائل إشعار داخل التطبيق:
-خدمة البريد الإلكتروني: يُستخدم SMTP أو خدمات سحابية متخصصة (مثل SendGrid أو Mailgun) لإرسال رسائل البريد. يشمل ذلك رسائل تفعيل الحساب، إعادة تعيين كلمة المرور، تذكير قبل انتهاء الاشتراك، وإشعارات فواتير أو تحديثات مهمة. تستند النماذج إلى قوالب HTML قابلة للتخصيص لضمان مهنية المظهر.
-الإشعارات الفورية: يمكن إرسال تنبيهات داخلية (Push Notifications) للمستخدمين عبر واجهة المستخدم، مثلاً تنبيهات حجز غرفة أو تنبيهات النظام. كما يمكن جدولة مهام دورية (Jobs) باستخدام ASP.NET Core Hosted Services أو أدوات مثل Quartz.NET أو Hangfire لإرسال رسائل تذكير مجدولة (مثل تذكير بالاجتماعات القادمة) دون تدخل المستخدم.
-لوحة التحكم الإدارية: يوفر النظام لوحة إشعارات لمدراء النظام والمشرفين لمتابعة الأحداث المهمة (اشتراكات منتهية، مشاكل فنية، إلخ) مع إمكانية تصدير التقارير المتعلقة بالأخطاء والنشاطات.
-دعم تعدد اللغات (Localization Support)
-يُصمم النظام لدعم العربية والإنجليزية بشكل أساسي، مع إمكانية إضافة لغات أخرى مستقبلاً:
-واجهة المستخدم: تُستخدم ملفات ترجمة (Resource Files) أو مكتبات Angular مثل ngx-translate لتخزين النصوص باللغتين. عند اختيار المستخدم للغة، يقوم التطبيق بتحميل الحزمة المناسبة من الترجمات وتطبيقها فورياً على عناصر الواجهة، مع تعديل اتجاه العرض إلى RTL عند العربية.
-النظام الخلفي: يعتمد ASP.NET Core Localization باستخدام ملفات .resx أو جداول قاعدة بيانات للترجمات، ويضبط الثقافة (Culture) للمستخدم في الردود. يتم تحديد اللغة إما حسب تفضيلات المستخدم أو تلقائياً من إعدادات المتصفح.
-التنسيقات الثقافية: تأخذ معالجة التواريخ والأرقام بعين الاعتبار الثقافة المختارة (مثلاً تنسيق التاريخ الهجري أو الميلادي حسب اللغة). وتُراعى واجهات المستخدم بحيث تكون شاملة، مثل إدراج التنبيهات باللغة المناسبة.
-الرسوم التخطيطية المعمارية (Architecture Diagrams)
-فيما يلي وصف نصي لبعض المخططات المعمارية المقترحة للنظام (يمكن رسمها بصرياً كأشكال توضيحية):
-رسم تخطيطي لسير عمل النظام (System Workflow Diagram): يوضح المراحل المتعاقبة من تسجيل المستخدم إلى تفعيل الحساب، ثم بدء الفترة التجريبية، وعملية الدفع، وانعكاس حالة الاشتراك على تفعيل أو تعليق الحساب​
-learn.microsoft.com
-​
-learn.microsoft.com
-.
-رسم تخطيطي لبنية قاعدة البيانات (Database Structure Diagram): يبرز الجداول الرئيسية وعلاقاتها. على سبيل المثال، جدول Tenants يرتبط بواحد إلى متعدد مع جداول Users وSubscriptions وOffices (المكاتب)؛ بينما جدول Users مرتبط بالمستأجر والمنشورات الخاصة به، وجدول Payments مرتبط بالاشتراكات. يوضح المخطط أيضاً كيفية تضمين معرف المستأجر (TenantId) في الجداول إذا كان النموذج متعدد المستأجرين مشتركاً​
-learn.microsoft.com
-.
-رسم تخطيطي لتفاعل المكونات (Component Interaction Diagram): يبيّن المكونات الرئيسية للنظام وعلاقاتها. يتضمن العميل (متصفح الويب) والواجهة الأمامية (Angular)، ويتصلان بالواجهة الخلفية (ASP.NET Core API) عبر HTTP. تخاطب الواجهة الخلفية طبقة البيانات (SQL DB) باستخدام EF Core، وتتعامل مع خدمات خارجية مثل بوابة الدفع أو خادم البريد. كما تظهر تداخل خدمات الإشعارات المجدولة مع وحدات البريد والواجهة الأمامية لترحيل التنبيهات​
-learn.microsoft.com
-.
-الدليل أعلاه يُظهر تصميماً متكاملاً لنظام SaaS لإدارة المكاتب، يجمع بين المتطلبات البيزنسية والمعمارية والتقنية. تم تجميع المعلومات بدقة ووضوح لتكون مرجعاً لفريقي واجهة المستخدم، وفريق التطوير، وفرق الاستثمار. الوثيقة مكتوبة بلغة عربية فصحى منظمة، مع استخدام المصطلحات التقنية الإنجليزية عند الضرورة لضمان الدقة والوضوح. 
+**Performance Optimization**
+- Lazy loading of modules
+- Change detection optimization
+- Virtual scrolling for large lists
+
+## 7. Multi-Tenancy Implementation
+
+### Tenant Identification
+
+The system identifies the current tenant through one of these methods:
+- Custom subdomain per tenant
+- URL path parameter
+- Request header
+- JWT token claim
+
+A middleware in ASP.NET Core captures the tenant identity and adds it to the request context for downstream components.
+
+### Data Isolation Strategies
+
+**Database-per-Tenant**
+- Complete isolation of tenant data
+- Custom database schema per tenant
+- Simplified backups and recovery per tenant
+
+**Schema-per-Tenant**
+- Shared database with separate schemas
+- Lower resource overhead
+- Simplified database management
+
+**Shared Database with Tenant ID**
+- Single database with tenant identifier column
+- Resource efficient
+- Relies on application-level filtering
+
+### Connection Management
+
+For the database-per-tenant strategy:
+- Connection strings stored securely per tenant
+- DbContext factory creates tenant-specific contexts
+- Connection pooling optimized per tenant
+
+For shared database approaches:
+- Global query filters in EF Core filter by tenant ID
+- Automatic tenant context injection in repositories
+- Row-level security as additional protection
+
+## 8. Security Implementation
+
+### Authentication
+
+- JWT (JSON Web Tokens) for stateless authentication
+- Secure token storage in HttpOnly cookies
+- Refresh token rotation for extended sessions
+
+### Authorization
+
+- Policy-based authorization with claim requirements
+- Role-based access control (RBAC)
+- Resource-based authorization for tenant data
+
+### Data Protection
+
+- HTTPS/TLS for all communications
+- Database encryption at rest
+- Sensitive data encryption in the application layer
+
+### Security Best Practices
+
+- Parameter binding to prevent SQL injection
+- Content Security Policy (CSP) headers
+- Cross-Origin Resource Sharing (CORS) restrictions
+- Protection against CSRF attacks
+- Regular security audits and penetration testing
+
+## 9. Deployment and DevOps
+
+### Continuous Integration/Continuous Deployment
+
+- Azure DevOps pipelines
+- GitHub Actions workflows
+- Automated testing before deployment
+
+### Infrastructure as Code
+
+- Azure Resource Manager templates
+- Terraform scripts for cloud resources
+- Docker containers for consistent environments
+
+### Monitoring and Logging
+
+- Application Insights integration
+- Centralized logging with Serilog
+- Performance metrics collection
+- Tenant-specific diagnostics
+
+### Scaling Strategies
+
+- Horizontal scaling with load balancing
+- Database sharding for high-volume tenants
+- Caching strategies with Redis
+- CDN integration for static assets

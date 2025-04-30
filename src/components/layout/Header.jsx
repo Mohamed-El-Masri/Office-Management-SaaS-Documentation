@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FaBars, FaSun, FaMoon } from 'react-icons/fa'
-// import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo.svg'
 
 const Header = ({ toggleSidebar, toggleTheme, theme }) => {
   return (
@@ -15,7 +15,7 @@ const Header = ({ toggleSidebar, toggleTheme, theme }) => {
           </button>
           
           <Link to="/" className="flex items-center gap-2">
-            {/* <img src={logo} alt="Office SaaS" className="h-8 w-auto" /> */}
+            <img src={logo} alt="Office SaaS" className="h-8 w-auto" />
             <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
               Office SaaS Documentation
             </span>

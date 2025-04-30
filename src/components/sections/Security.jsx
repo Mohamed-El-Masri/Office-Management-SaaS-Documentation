@@ -2,6 +2,8 @@ import React from 'react';
 import { MdSecurity, MdLock, MdShield, MdPrivacyTip } from 'react-icons/md';
 import SectionContainer from '../layout/SectionContainer';
 import CodeBlock from '../ui/CodeBlock';
+import SecuritySVG from '../../assets/illustrations/SecuritySVG';
+import AnimatedSection from '../ui/AnimatedSection';
 
 const Security = () => {
   const securityFeatures = [
@@ -49,23 +51,33 @@ const authenticateJWT = (req, res, next) => {
 
   return (
     <SectionContainer id="security" title="Security Features" subtitle="Enterprise-grade protection for your data">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        {securityFeatures.map((feature, index) => (
-          <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-            <div className="mb-4">{feature.icon}</div>
-            <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-            <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
-          </div>
-        ))}
-      </div>
+      <AnimatedSection>
+        <div className="flex justify-center mb-12">
+          <SecuritySVG width={700} height={350} className="max-w-full" />
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.2}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {securityFeatures.map((feature, index) => (
+            <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+              <div className="mb-4">{feature.icon}</div>
+              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
       
-      <div className="mt-8">
-        <CodeBlock 
-          code={securityCodeExample}
-          language="javascript"
-          title="JWT Authentication Example"
-        />
-      </div>
+      <AnimatedSection delay={0.4}>
+        <div className="mt-8">
+          <CodeBlock 
+            code={securityCodeExample}
+            language="javascript"
+            title="JWT Authentication Example"
+          />
+        </div>
+      </AnimatedSection>
     </SectionContainer>
   );
 };
